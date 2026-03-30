@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para minha Mily</title>
+  <style>
+    :root{
+      --bg:#120d0d;
+      --bg2:#241717;
+      --card:rgba(34,21,21,.72);
+      --line:rgba(255,231,220,.18);
+      --text:#f7e9df;
+      --muted:#d7c0b5;
+      --rose:#b9827c;
+      --rose2:#8f5f5a;
+      --gold:#e1c3a0;
+      --shadow:0 18px 45px rgba(0,0,0,.38);
+    }
+
+    *{box-sizing:border-box}
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family: Georgia, "Times New Roman", serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, rgba(185,130,124,.18), transparent 30%),
+        linear-gradient(180deg, #1a1010 0%, #130d0d 35%, #0b0808 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.04) 0 1px, transparent 1px) 0 0/28px 28px,
+        radial-gradient(circle at 80% 35%, rgba(255,255,255,.03) 0 1px, transparent 1px) 0 0/34px 34px;
+      opacity:.55;
+    }
+
+    .hero{
+      min-height:100vh;
+      padding:70px 20px 40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .hero-inner{
+      width:min(1120px, 100%);
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .intro-card,
+    .polaroid-stack,
+    .letter,
+    .gallery-wrap,
+    .final-card{
+      background:var(--card);
+      backdrop-filter: blur(6px);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .intro-card{
+      border-radius:28px;
+      padding:42px 34px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .intro-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -60px -60px auto;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(185,130,124,.18), transparent 65%);
+      border-radius:50%;
+    }
+
+    .eyebrow{
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:.8rem;
+      color:var(--gold);
+      margin-bottom:16px;
+    }
+
+    h1{
+      font-size:clamp(2.4rem, 5vw, 4.8rem);
+      line-height:.95;
+      margin:0 0 18px;
+      font-weight:600;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.8;
+      max-width:52ch;
+      margin-bottom:28px;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 22px;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:.98rem;
+      border:1px solid var(--line);
+      color:var(--text);
+      transition:.25s ease;
+      background:rgba(255,255,255,.04);
+    }
+
+    .btn.primary{
+      background:linear-gradient(180deg, var(--rose), var(--rose2));
+      border:none;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.03);
+    }
+
+    .mini{
+      margin-top:18px;
+      color:#bea69c;
+      font-size:.92rem;
+    }
+
+    .polaroid-stack{
+      border-radius:28px;
+      padding:22px;
+      display:grid;
+      place-items:center;
+      min-height:520px;
+      position:relative;
+    }
+
+    .stack{
+      position:relative;
+      width:min(420px, 92%);
+      aspect-ratio: 4 / 5;
+    }
+
+    .stack .ph{
+      position:absolute;
+      width:72%;
+      aspect-ratio: 4 / 5;
+      object-fit:cover;
+      background:#3a2a2a;
+      border:10px solid #f7ede7;
+      border-bottom-width:56px;
+      box-shadow:0 16px 35px rgba(0,0,0,.38);
+      border-radius:4px;
+    }
+
+    .stack .ph:nth-child(1){top:6%; left:6%; transform:rotate(-9deg);}
+    .stack .ph:nth-child(2){top:18%; right:2%; transform:rotate(7deg);}
+    .stack .ph:nth-child(3){bottom:2%; left:14%; transform:rotate(-4deg);}
+
+    section{
+      padding:32px 20px;
+    }
+
+    .section-inner{
+      width:min(980px, 100%);
+      margin:0 auto;
+    }
+
+    .letter{
+      border-radius:28px;
+      padding:34px 24px 26px;
+    }
+
+    .paper{
+      background:linear-gradient(180deg, rgba(249,239,232,.96), rgba(243,229,220,.92));
+      color:#452f2c;
+      border-radius:20px;
+      padding:30px min(5vw, 40px);
+      border:1px solid rgba(102,67,63,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+
+    .paper h2{
+      margin:0 0 20px;
+      font-size:clamp(1.7rem, 3vw, 2.5rem);
+      color:#5c3e3a;
+      text-align:center;
+    }
+
+    .paper p{
+      font-size:1.08rem;
+      line-height:1.95;
+      margin:18px 0;
+    }
+
+    .signature{
+      margin-top:28px;
+      text-align:right;
+      font-style:italic;
+      color:#6f4f4b;
+    }
+
+    .gallery-wrap{
+      border-radius:28px;
+      padding:22px;
+      margin-top:26px;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:clamp(1.5rem, 3vw, 2.2rem);
+      margin:8px 0 22px;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:16px;
+    }
+
+    .gallery img{
+      width:100%;
+      aspect-ratio: 1 / 1.2;
+      object-fit:cover;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 10px 25px rgba(0,0,0,.25);
+      transition:.28s ease;
+      background:#362525;
+    }
+
+    .gallery img:hover{
+      transform:translateY(-4px) scale(1.01);
+    }
+
+    .final-card{
+      border-radius:28px;
+      padding:28px;
+      margin:26px auto 50px;
+      text-align:center;
+    }
+
+    .final-card p{
+      color:var(--muted);
+      line-height:1.8;
+      margin:10px auto;
+      max-width:60ch;
+    }
+
+    .footer-note{
+      font-size:.88rem;
+      color:#b99f94;
+      margin-top:14px;
+    }
+
+    @media (max-width: 900px){
+      .hero-inner{
+        grid-template-columns:1fr;
+      }
+      .polaroid-stack{
+        min-height:430px;
+      }
+      .gallery{
+        grid-template-columns:repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px){
+      .hero{
+        padding-top:38px;
+      }
+      .intro-card,.polaroid-stack,.letter,.gallery-wrap,.final-card{
+        border-radius:22px;
+      }
+      .intro-card{
+        padding:30px 22px;
+      }
+      .gallery{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+      }
+      .paper{
+        padding:24px 20px;
+      }
+      .paper p{
+        font-size:1rem;
+        line-height:1.9;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="intro-card">
+        <div class="eyebrow">para minha mily</div>
+        <h1>Uma carta, <br>um adeus, <br>e todo o meu carinho.</h1>
+        <div class="subtitle">
+          Fiz esse cantinho com as nossas fotos, com as palavras que eu precisava te dizer
+          e com a música que me lembra você. É simples, mas foi feito com amor.
+        </div>
+
+        <div class="btn-row">
+          <a class="btn primary" href="https://open.spotify.com/intl-pt/track/6Th004brMCgqk6U9p1ldtX" target="_blank" rel="noopener noreferrer">🎵 Ouvir Love song</a>
+          <a class="btn" href="#carta">Ler a carta</a>
+          <a class="btn" href="#memorias">Ver nossas fotos</a>
+        </div>
+
+        <div class="mini">Dica: no GitHub Pages, esse botão já funciona sem precisar subir arquivo de música.</div>
+      </div>
+
+      <div class="polaroid-stack">
+        <div class="stack">
+          <img class="ph" src="foto01.jpg" alt="Foto de lembrança 1">
+          <img class="ph" src="foto02.jpg" alt="Foto de lembrança 2">
+          <img class="ph" src="foto03.jpg" alt="Foto de lembrança 3">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="carta">
+    <div class="section-inner">
+      <div class="letter">
+        <div class="paper">
+          <h2>Para minha mily.</h2>
+
+          <p>Oi,</p>
+
+          <p>Eu pensei muito antes de escrever isso. Talvez eu nunca consiga colocar em palavras tudo o que estou sentindo, mas senti que precisava tentar. Antes de tudo, eu quero te pedir perdão. Perdão por todas as vezes em que eu te magoei, por erros que cometi e por qualquer dor que eu possa ter causado. Se em algum momento eu fiz você se sentir menos amada ou menos importante, sinto muito de verdade. Nunca foi minha intenção te machucar, eu tô de coração partido de te ver desse jeito.</p>
+
+          <p>Também quero deixar claro que não estou escrevendo isso para tentar te convencer a voltar comigo ou para me justificar. Eu só precisava te dizer essas coisas do fundo do meu coração. Você é muito especial pra mim e ainda é a pessoa mais importante na minha vida.</p>
+
+          <p>A gente compartilhou três anos da nossa vida, cheios de momentos, lembranças, que não vão ser esquecidos por mim. Nada disso foi em vão para mim. Eu guardo tudo com muito amor.</p>
+
+          <p>Você foi uma das pessoas mais importantes da minha vida. Eu te amei de verdade, e ainda te amo. E justamente por te amar, eu também consigo reconhecer que você merece o melhor que a vida pode oferecer.</p>
+
+          <p>Se em algum momento eu não consegui te dar tudo o que você merecia, eu reconheço isso com o coração aberto. E se a melhor coisa para você agora é seguir em frente e encontrar alguém que possa te fazer mais feliz, alguém que te dê exatamente o que você merece, eu aceito isso. Mesmo que doa, eu quero que você seja feliz.</p>
+
+          <p>Obrigada por tudo que vivemos, por cada momento, cada carinho, cada memória que construímos juntas. Você marcou a minha vida de uma forma que nunca vai desaparecer.</p>
+
+          <p>Eu sempre vou torcer por você, pela sua felicidade e pelo seu caminho.</p>
+
+          <div class="signature">
+            Com todo o carinho do mundo,<br>
+            sua pintanguinha.
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-wrap" id="memorias">
+        <h3 class="section-title">Nossas memórias</h3>
+        <div class="gallery">
+          <img src="foto01.jpg" alt="Foto 01">
+          <img src="foto02.jpg" alt="Foto 02">
+          <img src="foto03.jpg" alt="Foto 03">
+          <img src="foto04.jpg" alt="Foto 04">
+          <img src="foto05.jpg" alt="Foto 05">
+          <img src="foto06.jpg" alt="Foto 06">
+          <img src="foto07.jpg" alt="Foto 07">
+          <img src="foto08.jpg" alt="Foto 08">
+          <img src="foto09.jpg" alt="Foto 09">
+          <img src="foto10.jpg" alt="Foto 10">
+          <img src="foto11.jpg" alt="Foto 11">
+          <img src="foto12.jpg" alt="Foto 12">
+          <img src="foto13.jpg" alt="Foto 13">
+          <img src="foto14.jpg" alt="Foto 14">
+          <img src="foto15.jpg" alt="Foto 15">
+          <img src="foto16.jpg" alt="Foto 16">
+          <img src="foto17.jpg" alt="Foto 17">
+          <img src="foto18.jpg" alt="Foto 18">
+          <img src="foto19.jpg" alt="Foto 19">
+          <img src="foto20.jpg" alt="Foto 20">
+        </div>
+      </div>
+
+      <div class="final-card">
+        <h3 class="section-title">Sempre com carinho</h3>
+        <p>Nem tudo que é amor consegue ficar. Mas ainda assim, continua sendo amor.</p>
+        <p>Esse site é só uma forma de guardar um pedaço bonito do que foi importante pra mim.</p>
+        <div class="footer-note">feito com amor, lembranças e saudade.</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
